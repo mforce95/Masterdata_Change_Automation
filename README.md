@@ -1,4 +1,4 @@
-# Masterdata-Change-Automation
+# Masterdata_Change_Automation
 Serialization Masterdata Change Automation
 
 Warning!
