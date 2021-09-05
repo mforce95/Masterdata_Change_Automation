@@ -126,7 +126,6 @@ def check_masterdata_version():
                             version1=pyautogui.locateCenterOnScreen('images/version1.png', confidence=0.9)
                             if not version1:
                                 click_minimize_remote_desktop()
-                                click_brave_browser()
                                 click_excel_progress()
                                 write_issue()
                                 click_excel_description()
