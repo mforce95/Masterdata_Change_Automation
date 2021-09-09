@@ -1,135 +1,123 @@
 import pyautogui
+import clipboard
 import time
 
-def copy():
+while True:
+### EXCEL PART START ###
+
+## Open Brave Browser
+    bravebrowser=pyautogui.locateCenterOnScreen('images/bravebrowser.png', confidence=0.9) 
+    if not bravebrowser:
+        print('Error locating Brave browser')
+        break
+
+    pyautogui.click(bravebrowser)
+    time.sleep(0.2)
+
+## Click on GTIN column
+    excel_gtin=pyautogui.locateCenterOnScreen('images/excel_gtin.png', grayscale=True)
+    if not excel_gtin:
+        print('Error locating GTIN column in Excel')
+        break
+
+    pyautogui.click(excel_gtin)
+    time.sleep(0.2)
+
+## Click on Filters menu
+    excel_filtermenu=pyautogui.locateCenterOnScreen('images/excel_filtermenu.png', grayscale=True)  
+    if not excel_filtermenu:
+        print('Error locating the filter menu in Excel')
+        break
+
+    pyautogui.click(excel_filtermenu)
+    time.sleep(0.5)
+
+## Click on ReApply Filters
+    excel_refilter=pyautogui.locateCenterOnScreen('images/excel_refilter.png', grayscale=True)
+    if not excel_refilter:
+        print('Error locating the reapply button in the filter menu in Excel')
+        break
+
+    pyautogui.click(excel_refilter)
+    time.sleep(0.2)
+
+## Click on the first GTIN
+    pyautogui.click(excel_gtin)
+    time.sleep(0.2)
+    pyautogui.press('down')
+
+## Copy the first GTIN
     pyautogui.hotkey('ctrl', 'c')
+    time.sleep(0.2)
 
-def selectall():
+### EXCEL PART END ###
+# ------------------ #
+### MT PART START ###
+
+## Open Remote Desktop
+    remotedesktop=pyautogui.locateCenterOnScreen('images/remotedesktop.png', confidence=0.9) 
+    if not remotedesktop:
+        print('Error locating Remote Desktop')
+        break
+
+    pyautogui.click(remotedesktop)
+    time.sleep(0.2)
+
+## Remove existing GTIN entry
+    mt_removegtin=pyautogui.locateCenterOnScreen('images/mt_removegtin.png') 
+    if not mt_removegtin:
+        print('Error locating GTIN entry clearing button in MT')
+        break
+
+    pyautogui.click(mt_removegtin)
+
+## Move to the GTIN input field
+    gtin_input=pyautogui.moveRel(-100, 0, duration=0.3)
+    pyautogui.click(gtin_input)
+    time.sleep(0.2)
+
+## Paste the GTIN // No hotkey support
     pyautogui.keyDown('ctrl')
-    time.sleep(0.1)
-    pyautogui.press('a')
-    time.sleep(0.1)
-    pyautogui.keyUp('ctrl')
-
-def backspace():
-    pyautogui.press('backspace')
-
-def paste_NoHotkeySupport():
-    pyautogui.keyDown('ctrl')
-    time.sleep(0.1)
+    time.sleep(0.2)
     pyautogui.press('v')
     time.sleep(0.1)
     pyautogui.keyUp('ctrl')
 
-def write_ok():
-    pyautogui.typewrite('x\n',interval=0.05)
+## Click on Apply filters
+    mt_apply=pyautogui.locateCenterOnScreen('images/mt_apply.png') 
+    if not mt_apply:
+        print('Error locating Apply Filter button in MT')
+        break
 
-def write_issue():
-    pyautogui.typewrite('ISSUE',interval=0.05)
+    pyautogui.click(mt_apply)
+    time.sleep(3.0)
 
-def write_issue_description_masterdata_timeout():
-    pyautogui.typewrite('MasterData TimeOut - Manual ReCheck\n',interval=0.05)
+## Click on expanding the GTIN versions
+    mt_openmenu=pyautogui.locateCenterOnScreen('images/mt_openmenu.png', grayscale=True) 
+    if not mt_openmenu:
+        print('Error locating the expanding button of the GTIN in MT')
+        break
 
-def click_brave_browser():
-    click_on_brave=pyautogui.moveTo(895, 1053, duration=0.3)
-    pyautogui.click(click_on_brave)
+    pyautogui.click(mt_openmenu)
+    time.sleep(3.0)
 
-def click_remote_desktop():
-    click_on_rd=pyautogui.moveTo(1204, 1053, duration=0.3)
-    pyautogui.click(click_on_rd)
-
-def click_minimize_remote_desktop():
-    click_on_minimize_rd=pyautogui.moveTo(1160, 10, duration=0.3)
-    pyautogui.click(click_on_minimize_rd)
-    
-def click_excel_gtin():  
-    click_on_gtin=pyautogui.moveTo(140, 310, duration=0.3)
-    pyautogui.click(click_on_gtin)
-
-def click_excel_progress():
-    click_on_progress=pyautogui.moveTo(310, 310, duration=0.3)
-    pyautogui.click(click_on_progress)
-
-def click_excel_description():  
-    click_on_description=pyautogui.moveTo(460, 310, duration=0.3)
-    pyautogui.click(click_on_description)
-
-def click_set_filter_again():
-    click_on_filter=pyautogui.moveTo(1710, 200, duration=0.3)
-    pyautogui.click(click_on_filter)
-    click_on_filter_again=pyautogui.moveTo(1710, 445, duration=0.3)
-    pyautogui.click(click_on_filter_again)
-
-def click_filter_productcode():  
-    click_on_filter_productcode=pyautogui.moveTo(1815, 232, duration=0.3)
-    pyautogui.click(click_on_filter_productcode)
-
-def click_apply_filter():  
-    click_on_apply_filter=pyautogui.moveTo(1850, 960, duration=0.3)
-    pyautogui.click(click_on_apply_filter)
-
-def click_masterdata():
-    click_on_masterdata=pyautogui.moveTo(120, 215, duration=3)
-    pyautogui.click(click_on_masterdata)
-    
-def select_masterdata():
-    click_on_select_masterdata=pyautogui.moveRel(115, 100, duration=0.3)
-    pyautogui.click(click_on_select_masterdata)
-
-def select_masterdata_new_version():
-    click_on_select_masterdata_new_version=pyautogui.moveRel(160, 25, duration=0.3)
-    pyautogui.click(click_on_select_masterdata_new_version)
-
-def open_masterdata():
-    click_on_viewmenu=pyautogui.moveTo(133, 33, duration=0.3)
-    pyautogui.click(click_on_viewmenu)
-    click_on_expand=pyautogui.moveTo(170, 55, duration=0.3)
-    pyautogui.click(click_on_expand)
-
-def ok_button():
-    click_on_okbutton=pyautogui.moveTo(1320, 950, duration=0.5)
-    pyautogui.click(click_on_okbutton)
-
-def select_mah():
-    mah_image=pyautogui.locateCenterOnScreen('images/mah.png', confidence=0.9)
-    
-    if not mah_image:
-        click_minimize_remote_desktop()
-        click_excel_progress()
-        write_issue()
-        click_excel_description()
-        pyautogui.typewrite('MAH image not found - Manual ReCheck\n',interval=0.05)
-    else:
-        pyautogui.click(mah_image)
-        # MISSING SELECT MAH AND CLICK ON OK
-
-def check_masterdata_version():
-    version7=pyautogui.locateCenterOnScreen('images/version7.png', confidence=0.9)
-
+## Check the GTIN version
+    version7=pyautogui.locateCenterOnScreen('images/version7.png')
     if not version7:
-        print('Ver7 not found')
-        version6=pyautogui.locateCenterOnScreen('images/version6.png', confidence=0.9)
+        version6=pyautogui.locateCenterOnScreen('images/version6.png')
         if not version6:
-            print('Ver6 not found')
-            version5=pyautogui.locateCenterOnScreen('images/version5.png', confidence=0.9)
+            version5=pyautogui.locateCenterOnScreen('images/version5.png')
             if not version5:
-                print('Ver5 not found')
-                version4=pyautogui.locateCenterOnScreen('images/version4.png', confidence=0.9)
+                version4=pyautogui.locateCenterOnScreen('images/version4.png')
                 if not version4:
-                    print('Ver4 not found')
-                    version3=pyautogui.locateCenterOnScreen('images/version3.png', confidence=0.9)
+                    version3=pyautogui.locateCenterOnScreen('images/version3.png')
                     if not version3:
-                        print('Ver3 not found')
-                        version2=pyautogui.locateCenterOnScreen('images/version2.png', confidence=0.9)
+                        version2=pyautogui.locateCenterOnScreen('images/version2.png')
                         if not version2:
-                            print('Ver2 not found')
-                            version1=pyautogui.locateCenterOnScreen('images/version1.png', confidence=0.9)
+                            version1=pyautogui.locateCenterOnScreen('images/version1.png')
                             if not version1:
-                                click_minimize_remote_desktop()
-                                click_excel_progress()
-                                write_issue()
-                                click_excel_description()
-                                pyautogui.typewrite('Version not found - Manual ReCheck\n',interval=0.05)
+                                print('Error locating the GTIN version in MT')
+                                break
                             else:
                                 pyautogui.click(version1, button='right')
                         else:
@@ -145,24 +133,67 @@ def check_masterdata_version():
     else:
         pyautogui.click(version7, button='right')
 
-click_brave_browser()
-click_excel_progress()
-click_set_filter_again()
-click_excel_gtin()
-copy()
-click_remote_desktop()
-click_filter_productcode()
-selectall()
-backspace()
-paste_NoHotkeySupport()
-click_apply_filter()
-click_masterdata()
-open_masterdata()
-time.sleep(0.5)
-check_masterdata_version()
-time.sleep(0.5)
-select_masterdata()
-time.sleep(0.5)
-select_masterdata_new_version()
-time.sleep(3.0)
-select_mah()
+    time.sleep(1.0)
+
+## Select creating a new version of the MasterData
+    mt_masterdatamenu=pyautogui.locateCenterOnScreen('images/mt_masterdatamenu.png') 
+    if not mt_masterdatamenu:
+        print('Error locating the MasterData menu in MT')
+        break
+
+    pyautogui.click(mt_masterdatamenu)
+    time.sleep(1.0)
+
+    mt_newversion=pyautogui.locateCenterOnScreen('images/mt_newversion.png') 
+    if not mt_newversion:
+        print('Error locating the MasterData new version button in MT')
+        break
+
+    pyautogui.click(mt_newversion)
+    time.sleep(3.0)
+    
+## Click on the MAH selector button
+    mt_mah=pyautogui.locateCenterOnScreen('images/mt_mah.png') 
+    if not mt_mah:
+        print('Error locating the MAH selector button in MT')
+        break
+
+    pyautogui.click(mt_mah)
+    time.sleep(0.2)
+
+## Select the new MAH // MISSING
+
+## Wait for the EMVO Answer // MISSING
+
+## If successfull maximum 30 seconds  // MISSING
+
+
+## Minimize the Remote Desktop window
+    rd_minimize=pyautogui.locateCenterOnScreen('images/rd_minimize.png', confidence=0.9) 
+    if not rd_minimize:
+        print('Error locating the button to minimize the Remote Desktop window')
+        break
+
+    pyautogui.click(rd_minimize)
+    time.sleep(0.2)
+
+## Write x in the Excel
+    excel_x=pyautogui.locateCenterOnScreen('images/excel_x.png', grayscale=True)
+    
+    if not excel_x:
+        print('Error locating Update column in Excel')
+        break
+
+    pyautogui.click(excel_x)
+    time.sleep(0.1)
+    pyautogui.press('down', interval=0.1)
+    pyautogui.typewrite('x\n')
+
+
+## If not successfull maximum 30 seconds // MISSING
+## Write timeout in the Excel // MISSING
+
+
+## Finish
+    print('GTIN done:',clipboard.paste())
+    break
